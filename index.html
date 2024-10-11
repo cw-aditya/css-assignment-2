@@ -14,31 +14,37 @@
         align-items: center;
         flex-direction: column;
       }
+      .cars {
+        position: relative;
+        width: 400px;
+        height: 266.66px;
+      }
       .car-container {
-        position: fixed;
+        position: absolute;
         background-repeat: no-repeat;
         background-size: cover;
         width: 400px;
-        height: 300px;
+        height: 266.66px;
       }
       .car-top {
         background-image: url("./assets/Cars/Pure Grey.png");
-        position: sticky;
+        z-index: 2;
       }
       .car-bottom {
         background-image: url("./assets/Cars/Flame Red.png");
+        z-index: 1;
       }
       .car-removal-animation {
-        animation: shrink-hight-animation 8s linear infinite forwards;
+        animation: shrink-hight-animation 8s linear infinite;
       }
       @keyframes shrink-hight-animation {
         0% {
-          height: 300px;
+          height: 266.66px;
         }
-        12.5% {
-          height: 300px;
-        }
-        50% {
+        /* 12.5% {
+          height: 266.66px;
+        } */
+        60% {
           height: 0px;
         }
         100% {
@@ -47,7 +53,7 @@
       }
       .ellipse-bottom {
         position: relative;
-        top: 90px;
+        top: 240px;
         background-image: url("./assets/Ellipse Bottom.png");
         background-repeat: no-repeat;
         background-size: contain;
@@ -75,8 +81,8 @@
       }
       .ellipse-bottom-to-top {
         position: relative;
-        top: 45px;
-        opacity: 0;
+        bottom: 105px;
+        opacity: 1;
         background-image: url("./assets/Ellipse Bottom to Top .png");
         background-repeat: no-repeat;
         background-size: contain;
@@ -86,11 +92,11 @@
       }
       @keyframes bottom-to-top-animation {
         0% {
-          top: 45px;
+          bottom: 105px;
           opacity: 0;
         }
         12.5% {
-          top: 45px;
+          bottom: 85px;
           opacity: 0;
         }
         17.5% {
@@ -103,11 +109,11 @@
           opacity: 1;
         }
         50% {
-          top: -120px;
+          bottom: 240px;
           opacity: 0;
         }
         100% {
-          top: -120px;
+          bottom: 240px;
           opacity: 0;
         }
       }
@@ -116,10 +122,36 @@
   <body>
     <div class="container">
       <div class="ellipse-bottom"></div>
-      <div class="car-container car-bottom"></div>
-      <div class="car-container car-top car-removal-animation"></div>
+      <div class="cars">
+        <div class="car-container car-bottom" id="car-bottom"></div>
+        <div class="car-container car-top car-removal-animation" id="car-top"></div>
+      </div>
       <div class="ellipse-bottom-to-top"></div>
     </div>
-    <script></script>
+    <script>
+      let carImages = [
+        "./assets/Cars/Pure Grey.png",
+        "./assets/Cars/Flame Red.png",
+        "./assets/Cars/Pristine White.png",
+        "./assets/Cars/Empowered Oxide.png",
+        "./assets/Cars/Virtual Sunrise.png",
+      ]
+      let carAtTop = carImages.shift()
+      let carAtBottom = carImages.shift()
+      // carImages.push(carAtTop)
+      // carImages.push(carAtBottom)
+      let carAtTopDiv = document.getElementById('car-top')
+      let carAtBottomDiv = document.getElementById('car-bottom')
+      setInterval(()=> {
+        carImages.push(carAtTop)
+        carAtTop = carAtBottom
+        carAtBottom = carImages.shift()
+        carAtTopDiv.style.backgroundImage = `url('${carAtTop}')`
+        carAtBottomDiv.style.backgroundImage = `url('${carAtBottom}')`
+      }, 8000)
+
+
+
+    </script>
   </body>
 </html>
