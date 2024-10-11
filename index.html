@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Animation</title>
+    <style>
+      .container {
+        width: 800px;
+        height: 400px;
+        background: #676767;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .car-container {
+        position: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 400px;
+        height: 300px;
+      }
+      .car-top {
+        background-image: url("./assets/Cars/Pure Grey.png");
+        position: sticky;
+      }
+      .car-bottom {
+        background-image: url("./assets/Cars/Flame Red.png");
+      }
+      .car-removal-animation {
+        animation: shrink-hight-animation 8s linear infinite forwards;
+      }
+      @keyframes shrink-hight-animation {
+        0% {
+          height: 300px;
+        }
+        12.5% {
+          height: 300px;
+        }
+        50% {
+          height: 0px;
+        }
+        100% {
+          height: 0px;
+        }
+      }
+      .ellipse-bottom {
+        position: relative;
+        top: 90px;
+        background-image: url("./assets/Ellipse Bottom.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 420px;
+        height: 50px;
+        animation: grow-shrink-animation 8s linear infinite;
+      }
+      @keyframes grow-shrink-animation {
+        0% {
+          opacity: 0;
+          scale: 0.8;
+        }
+        12.5% {
+          opacity: 1;
+          scale: 1;
+        }
+        25% {
+          opacity: 0;
+          scale: 0.8;
+        }
+        100% {
+          opacity: 0;
+          scale: 0.8;
+        }
+      }
+      .ellipse-bottom-to-top {
+        position: relative;
+        top: 45px;
+        opacity: 0;
+        background-image: url("./assets/Ellipse Bottom to Top .png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 420px;
+        height: 50px;
+        animation: bottom-to-top-animation 8s linear infinite;
+      }
+      @keyframes bottom-to-top-animation {
+        0% {
+          top: 45px;
+          opacity: 0;
+        }
+        12.5% {
+          top: 45px;
+          opacity: 0;
+        }
+        17.5% {
+          opacity: 1.5;
+        }
+        32.5% {
+          opacity: 1;
+        }
+        45% {
+          opacity: 1;
+        }
+        50% {
+          top: -120px;
+          opacity: 0;
+        }
+        100% {
+          top: -120px;
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="ellipse-bottom"></div>
+      <div class="car-container car-bottom"></div>
+      <div class="car-container car-top car-removal-animation"></div>
+      <div class="ellipse-bottom-to-top"></div>
+    </div>
+    <script></script>
+  </body>
+</html>
