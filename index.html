@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Animation</title>
+    <style>
+      .container {
+        width: 800px;
+        height: 400px;
+        background: #676767;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .cars {
+        position: relative;
+        width: 400px;
+        height: 266.66px;
+      }
+      .car-container {
+        position: absolute;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 400px;
+        height: 266.66px;
+      }
+      #car-1 {
+        background-image: url("./assets/Cars/Pure Grey.png");
+      }
+      #car-2 {
+        background-image: url("./assets/Cars/Flame Red.png");
+      }
+      #car-3 {
+        background-image: url("./assets/Cars/Pristine White.png");
+      }
+      #car-4 {
+        background-image: url("./assets/Cars/Empowered Oxide.png");
+      }
+      #car-5 {
+        background-image: url("./assets/Cars/Virtual Sunrise.png");
+      }
+      .car-removal-animation {
+        animation: shrink-hight-animation 6s linear forwards;
+      }
+      @keyframes shrink-hight-animation {
+        0% {
+          height: 200px;
+        }
+        12.5% {
+          height: 200px;
+        }
+        100% {
+          height: 50px;
+        }
+      }
+      .ellipse-bottom {
+        position: relative;
+        top: 230px;
+        background-image: url("./assets/Ellipse Bottom.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 420px;
+        height: 50px;
+        opacity: 0;
+        animation: grow-shrink-animation 6s linear;
+        animation-iteration-count: 5;
+      }
+      @keyframes grow-shrink-animation {
+        0% {
+          opacity: 0;
+          scale: 0.8;
+        }
+        12.5% {
+          opacity: 1;
+          scale: 1;
+        }
+        25% {
+          opacity: 0;
+          scale: 0.8;
+        }
+        100% {
+          opacity: 0;
+          scale: 0.8;
+        }
+      }
+      .ellipse-bottom-to-top {
+        position: relative;
+        bottom: 240px;
+        opacity: 0;
+        background-image: url("./assets/Ellipse Bottom to Top .png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 420px;
+        height: 50px;
+        animation: bottom-to-top-animation 6s linear infinite;
+        animation-iteration-count: 5;
+      }
+      @keyframes bottom-to-top-animation {
+        0% {
+          bottom: 85px;
+          opacity: 0;
+        }
+        12.5% {
+          bottom: 85px;
+          opacity: 0;
+        }
+        17.5% {
+          opacity: 1.5;
+        }
+        32.5% {
+          opacity: 1;
+        }
+        45% {
+          opacity: 1;
+        }
+        100% {
+          bottom: 240px;
+          opacity: 0;
+        }
+      }
+      .car-title {
+        position: fixed;
+        background-repeat: no-repeat;
+        background-size: contain;
+        top: 300px;
+        width: 100px;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="ellipse-bottom"></div>
+      <div class="cars">
+        <div class="car-container" id="car-5"></div>
+        <div class="car-container" id="car-4"></div>
+        <div class="car-container" id="car-3"></div>
+        <div class="car-container" id="car-2"></div>
+        <div class="car-container" id="car-1"></div>
+      </div>
+      <div class="ellipse-bottom-to-top"></div>
+      <div class="car-title" id="car-title"></div>
+    </div>
+    <script>
+      let carImages = [
+        "Pure Grey.png",
+        "Flame Red.png",
+        "Pristine White.png",
+        "Empowered Oxide.png",
+        "Virtual Sunrise.png",
+      ];
+      document.getElementById("car-1").classList.add("car-removal-animation");
+      document.getElementById(
+        "car-title"
+      ).style.backgroundImage = `url('./assets/Color Text/Pure Grey.png')`;
+      let count = 1;
+      setInterval(() => {
+        if (count > 5) {
+          document.getElementById("car-title").style.backgroundImage = ``;
+          return;
+        } else {
+          let carAtTop = carImages[count];
+          document.getElementById(
+            "car-title"
+          ).style.backgroundImage = `url('./assets/Color Text/${carAtTop}')`;
+          count++;
+          console.log("added to ", count);
+          document
+            .getElementById(`car-${count}`)
+            .classList.add("car-removal-animation");
+        }
+      }, 6000);
+    </script>
+  </body>
+</html>
